@@ -78,3 +78,9 @@ Before the algorithm we must implement i found:
 Aim: minimizing comparisons.
     winners: binary insertion, tree selection, straight two-way merging.
 
+
+
+## subject requirements
+
+Your program must be able to handle at least 3000 **different** integers.
+a set is a candidate

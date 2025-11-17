@@ -42,18 +42,19 @@ REQUIRED_DIRS	= $(OBJDIR)
 #                               COMPILER SETUP                                 #
 # ============================================================================ #
 CC 				= c++ -std=c++98 
-CC 				= clang++ -std=c++98
+#CC 				= clang++ -std=c++98
 WRNFL			= -Wall -Wextra -Werror -MMD -MP #-Wshadow #-fsanitize=address
-#DBGFL			= -g3  -pg
+DBGFL			= -g3  -pg
 CFLGS			= $(DBGFL) $(WRNFL) -c 
 #HEADS			= -I$(INCDIR)
 LFLGS 			= #-fsanitize=address
 
-HEADERS		=	MutantStack.hpp \
+#HEADERS		=	MutantStack.hpp \
 
 
-SRCS_TARGET	= 	MutantStack.cpp \
-				main.cpp
+#SRCS_TARGET	= 	MutantStack.cpp \
+
+SRCS_TARGET		=	main.cpp
 
 
 FILE_TARGET = $(addprefix $(SRCDIR_TARGET), $(SRCS_TARGET))
