@@ -2,6 +2,9 @@
 #define PMERGEME_HPP
 #include <cstddef>
 #include <deque>
+#include <vector>
+
+void Imprimirme(int n) ;
 
 template<typename T, typename Container = std::deque<T> >
 class PmergeMe: public Container
@@ -34,8 +37,11 @@ class PmergeMe: public Container
         void sort3(void);
         void sort2(void);
         void pair_eval(size_t i, size_t j, T * mij, T * Mij);
+        void jacobsthal(size_t elements_to_insert);
+        //void Imprimirme(int n);
                 
         size_t _n;
+        std::vector<T> J;
         // size_t _n_main;
         // size_t _main_i;
         // size_t _main_e;
@@ -111,10 +117,28 @@ void PmergeMe<T,Container>::sortSTL(void)
 template<typename T, typename Container>
 void PmergeMe<T,Container>::binary_insertion(size_t pend_i, size_t pend_e)
 {
+
+    PmergeMe<unsigned int, std::vector<unsigned int> > aux;
+    aux.insert(aux.begin(),Container::begin() + pend_i,Container::begin() + pend_e);
+
+    Container::erase(Container::begin() + pend_i, Container::begin() + pend_e);
+    
     std::cout << "Into (0, " << pend_i - 1 << ")==> ";
+    std::for_each(Container::begin(), Container::end(), Imprimirme);
+    std::cout << std::endl;
 
+    std::cout << "Insert ==> ";
+    std::for_each(aux.begin(), aux.end(), Imprimirme);
+    std::cout << std::endl;    
+    
+    this->jacobsthal((pend_e -1 ) - pend_i + 1);
 
+    std::cout << "With Jacobsthal  ==> ";
+    std::for_each(this->J.begin(),this->J.end(),Imprimirme  );
+    std::cout << std::endl;  
+    /*  
     size_t idx = 0;
+
 
     while (idx < (pend_i) ) 
     {
@@ -122,7 +146,8 @@ void PmergeMe<T,Container>::binary_insertion(size_t pend_i, size_t pend_e)
     }
     std::cout << " Inserting (" << pend_i << "," << pend_e - 1 <<") ==>";
     std::cout << std::endl;
-
+*/
+    /*
     while (pend_i < pend_e)
     {
         std::cout << "inserting " << (*this)[pend_i] << std::endl;
@@ -131,6 +156,22 @@ void PmergeMe<T,Container>::binary_insertion(size_t pend_i, size_t pend_e)
         pend_i++;
 
     }
+        */
+       for (size_t i = 0; i < this->J.size() ; i++)
+       { 
+            std::cout << "rango insercion " << this->J[ i + 1 ] << ", " << this->J[ i ] << std::endl;
+            for (size_t k = this->J[ i + 1 ];  this->J[ i ] < k; k--)
+            {
+                //std::cout << "inserting elemen[" << (pend_i - 1 )+ ( k) << "]=" << (*this)[ ( pend_i - 1 ) + ( k ) ] << std::endl;
+                std::cout << "inserting elemen[" << (pend_i - 1 )+ ( k) << "]=" << aux[k - 1] << std::endl;
+                this->insert_element(Container::size() - 1 , aux[k - 1] );                
+                //this->insert_element(pend_i - 1,(*this)[ ( pend_i - 1 ) + ( k ) ] );
+                //Container::erase(Container::begin() + pend_i + k);
+            }
+       }
+    std::cout << "Resultado ==> ";
+    std::for_each(Container::begin(), Container::end(), Imprimirme);
+    std::cout << std::endl;
 }
 
 template<typename T, typename Container>
@@ -463,6 +504,34 @@ void PmergeMe<T,Container>::sort(void)
 template<typename T, typename Container>
 void PmergeMe<T,Container>::sortn(size_t n)
 {
+    std::vector winner;
+    std::vector loss;
+    for(i= 0; i <= n/2; i+=2)
+    {
+    if ( (*this)[i] > (*this(i+1) )     {
+        winner.push_back( (*this)[i] );
+        losser.push_back( (*this[ i + 1]) );
+    }else {
+        winner.push_back( (*this)[i + 1] );
+        losser.push_back( (*this)[ i ] );
+    }
+    if  ( (n % 2) == 1 ) {losser.push_back( (*this[ n - 1 ]) )}
+    }
+    if ( (winner.size() == 2 ) && (  winner.front() > winner.back() ) )
+    {   
+        winner.push_back( winner.front() );
+        winner.erase(winner.begin());
+
+    }
+    else
+    {
+        
+
+    }
+    }
+
+}
+/*{
     size_t n_new;
     std::cout << "Sorting 1 ," << n << std::endl;    
     if (n >= 10)
@@ -484,7 +553,28 @@ void PmergeMe<T,Container>::sortn(size_t n)
     } else if (n == 2) {
         sort2();
     }
-}
+} */
 #endif
 
+template<typename T, typename Container>
+void  PmergeMe<T,Container>::jacobsthal(size_t elements_to_insert)
+{
+    if (this->J.size() > 0) { this->J.clear();}
+    if (elements_to_insert > 0) {this->J.push_back(0);}
+    if (elements_to_insert > 1) {this->J.push_back(1);}
+    for (size_t i = 2; i < elements_to_insert; ++i)
+    {
+        this->J.push_back(this->J[ i - 1] + 2LL * this->J[ i - 2]);
+        if ( elements_to_insert <= this->J.back() )
+            break;
+    }
+}        
+/*
+template<typename T, typename Container>
+void PmergeMe<T,Container>::Imprimirme(int n) {
+    std::cout << n << "\t";
+*/
 
+void Imprimirme(int n) {
+    std::cout << n << "\t";
+}

@@ -109,9 +109,9 @@ int main(int argc, char** argv)
 	clock_t start_sort_v = clock();
 	v.sort();
 	clock_t end_sort_v = clock();
-	//clock_t start_sort_d = clock();
+	clock_t start_sort_d = clock();
 	d.sort();
-	//clock_t end_sort_d = clock();
+	clock_t end_sort_d = clock();
 
 	std::cout << "Vector content After:\t" ;
 	std::for_each(v.begin(), v.end(), ImprimirElemento);
@@ -123,8 +123,8 @@ int main(int argc, char** argv)
 
 	std::cout << "Vector sort Time : " ;
     std::cout << (double) 1000000.0 *  (end_sort_v - start_sort_v) / CLOCKS_PER_SEC  << "µs" << std::endl;
-	//std::cout << "Deque sort Time : " ;
-    //std::cout << (double) 1000000.0 *  (end_sort_d - start_sort_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
+	std::cout << "Deque sort Time : " ;
+    std::cout << (double) 1000000.0 *  (end_sort_d - start_sort_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
 	
 
 
@@ -133,4 +133,18 @@ int main(int argc, char** argv)
 	std::cout << " elements with std::vector<unsigned int> : " << std::endl;
 	std::cout << "Time to process a range of " << v.size() ;
 	std::cout << " elements with std::deque<unsigned int> : " << std::endl;
+
+	//v.jacobsthal(10);
+
+	std::cout << "Jacobsthal de 20 ==>";
+	std::vector<long long> J;
+
+	J.reserve(20);
+	J.push_back(0);
+	J.push_back(1);
+	for (int i = 2; i < 20; ++i)
+		J.push_back(J[ i - 1 ] + 2LL * J[ i - 2]);
+
+	std::for_each(J.begin(), J.end(), ImprimirElemento);
+	std::cout << std::endl;
 }

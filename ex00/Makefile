@@ -33,7 +33,7 @@ DARK_YELLOW		=	\033[38;5;143m
 #                                 TARGETS                                      #
 # ============================================================================ #
 
-TARGET			= main
+TARGET			= btc
 SRCDIR			= ./
 OBJDIR 			= ./obj/
 
