@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 	//v.insert(v.begin(), vec.begin(), vec.end());
 	clock_t end_insert_v = clock();
 	std::cout << "Vector content Before:  " ;
-	std::for_each(v.begin(), v.end(), ImprimirElemento);
+	std::for_each(v.before_begin(), v.before_end(), ImprimirElemento);
 	std::cout << std::endl;
 
 
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 	clock_t end_insert_d = clock();
 
 	std::cout << "Deque content Before:   " ;
-	std::for_each(d.begin(), d.end(), ImprimirElemento);
+	std::for_each(d.before_begin(), d.before_end(), ImprimirElemento);
 	std::cout << std::endl;
 
 	std::cout << "------------------ INSERT TIMES ---------------------: " << std::endl ;
@@ -109,22 +109,22 @@ int main(int argc, char** argv)
 	clock_t start_sort_v = clock();
 	v.sort();
 	clock_t end_sort_v = clock();
-	//clock_t start_sort_d = clock();
+	clock_t start_sort_d = clock();
 	d.sort();
-	//clock_t end_sort_d = clock();
+	clock_t end_sort_d = clock();
 
 	std::cout << "Vector content After:\t" ;
-	std::for_each(v.begin(), v.end(), ImprimirElemento);
+	std::for_each(v.after_begin(), v.after_end(), ImprimirElemento);
 	std::cout << std::endl;
-	//std::cout << "Deque content After:  " ;
-	//std::for_each(d.begin(), d.end(), ImprimirElemento);
-	//std::cout << std::endl;
+	std::cout << "Deque content After:\t" ;
+	std::for_each(d.after_begin(), d.after_end(), ImprimirElemento);
+	std::cout << std::endl;
 
 
 	std::cout << "Vector sort Time : " ;
     std::cout << (double) 1000000.0 *  (end_sort_v - start_sort_v) / CLOCKS_PER_SEC  << "µs" << std::endl;
-	//std::cout << "Deque sort Time : " ;
-    //std::cout << (double) 1000000.0 *  (end_sort_d - start_sort_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
+	std::cout << "Deque sort Time : " ;
+    std::cout << (double) 1000000.0 *  (end_sort_d - start_sort_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
 	
 
 
