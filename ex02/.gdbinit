@@ -26,6 +26,11 @@ break main
 break arg_pars.c:54 if i == 5
 # Set other breakpoint
 break main
-break PmergeMe.hpp:500
+break PmergeMe.hpp:164
+display this->sorted
+display *rightPos
+display *midpos
+display *leftPos
+display newElement
 # set alias
 run 77 55 33 66 11 44 22 

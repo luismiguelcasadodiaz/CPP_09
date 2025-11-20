@@ -119,10 +119,11 @@ void PmergeMe<T,Container>::sortSTL(void)
 template<typename T, typename Container>
 void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & main, Container & pend)
 {
-    std::cout << "Into (0, " << main.size() - 1 << ")==> ";
-
+    
 
     size_t idx = 0;
+    /*
+    std::cout << "Into (0, " << main.size() - 1 << ")==> ";
 
     while (idx < main.size() ) 
     {
@@ -138,12 +139,20 @@ void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & mai
     std::cout << std::endl;
 
     idx = 0;
+    */
     while (idx < pend.size())
     {
-        std::cout << "inserting " << pend[idx] << std::endl;
+        //std::cout << "inserting " << pend[idx] << std::endl;
         // Where is located the already ordered pair of the pending one to insert
-        typename Container::iterator it = find (sorted.begin(), sorted.end(), main[idx]);
-        this->insert_element(sorted, it, pend[idx++]);
+        if (idx < main.size() )
+        { 
+            typename Container::iterator it = find (sorted.begin(), sorted.end(), main[idx]);
+            this->insert_element(sorted, it, pend[idx++]);
+        }
+        else
+        {
+            this->insert_element(sorted, sorted.end(), pend[idx++]);
+        }
     }
 }
 
@@ -157,7 +166,7 @@ Container::iterator rightPos, T newElement)
 	while (leftPos != rightPos)
 	{
 		typename Container::difference_type dist = std::distance(leftPos , rightPos);
-        typename Container::iterator midPos = sorted.begin() + dist  / 2;
+        typename Container::iterator midPos = leftPos + dist  / 2;
 		
 		//std::cout << "Checking: leftPos=" << leftPos << ", midPos=" << midPos 
 		  //        << ", rightPos=" << rightPos << " -> v[" << midPos << "]=" << v[midPos] << std::endl;
@@ -174,7 +183,7 @@ Container::iterator rightPos, T newElement)
 		}
 	}
 	
-	std::cout << "Insert position found: " << std::distance(sorted.begin(), leftPos) << std::endl;
+	//std::cout << "Insert position found: " << std::distance(sorted.begin(), leftPos) << std::endl;
 	
 	// Insert the new element
 	sorted.insert(leftPos, newElement);
