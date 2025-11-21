@@ -31,7 +31,8 @@ class PmergeMe
         PmergeMe & operator=(PmergeMe const & other);
         void insert_element(Container & sorted, typename Container::iterator iterator, T newElement);
         void binary_insertion(Container & sorted, Container & main, Container & pend);
-        void sortn(Container & sorted, Container & numbers);        
+        void sortn(Container & sorted, Container & numbers);
+        void jacobsthal(size_t elements_to_insert);       
         /*void sort5(void);
         void sort4(void);        
         void sort3(void);
@@ -42,6 +43,7 @@ class PmergeMe
         size_t _n;
         Container _numbers;
         Container _sorted;
+        Container J;        
 
         // size_t _n_main;
         // size_t _main_i;
@@ -79,6 +81,7 @@ PmergeMe<T,Container>::PmergeMe(std::vector<T> & data)
 {
     this->_numbers.insert(this->_numbers.begin(), data.begin(), data.end());
     this->_n = this->_numbers.size();
+    this->jacobsthal(this->_n);
 }
 
 
@@ -120,14 +123,14 @@ template<typename T, typename Container>
 void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & main, Container & pend)
 {
     
-
+    (void)main;
     size_t idx = 0;
-    /*
-    std::cout << "Into (0, " << main.size() - 1 << ")==> ";
+    
+    std::cout << "Into (0, " << sorted.size() - 1 << ")==> ";
 
-    while (idx < main.size() ) 
+    while (idx < sorted.size() ) 
     {
-        std::cout << main[idx++] << " ";
+        std::cout << sorted[idx++] << " ";
     }
     std::cout << " Inserting (" << main.size() << "," << main.size() + pend.size() - 1 <<") ==>";
     
@@ -139,7 +142,8 @@ void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & mai
     std::cout << std::endl;
 
     idx = 0;
-    */
+    
+    /*
     while (idx < pend.size())
     {
         //std::cout << "inserting " << pend[idx] << std::endl;
@@ -153,6 +157,31 @@ void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & mai
         {
             this->insert_element(sorted, sorted.end(), pend[idx++]);
         }
+    }
+    */
+    this->insert_element(sorted, sorted.end() , pend[1]);
+    this->insert_element(sorted, sorted.end() , pend[0]);
+    idx = 2;
+    //while ( ( idx < ( this->J.size() - 1) ) && ( this->J[idx + 1] <= pend.size() ) )
+    while ( ( idx < ( this->J.size() - 1) ) )
+    {
+        size_t lastone;
+        if ( ( pend.size() - 1 ) <= this->J[ idx + 1 ] )
+        {
+            lastone = pend.size() - 1 ;
+        }
+        else
+        {
+            lastone = this->J[ idx + 1 ];
+        }
+        
+        for (size_t i = lastone ; this->J[ idx ] < i; i--)
+        {
+            typename Container::iterator it = find (sorted.begin(), sorted.end(), main[idx]);
+            this->insert_element(sorted, it , pend[i]);            
+            //this->insert_element(sorted, sorted.end() , pend[i]);
+        }
+        idx++;
     }
 }
 
@@ -183,7 +212,7 @@ Container::iterator rightPos, T newElement)
 		}
 	}
 	
-	//std::cout << "Insert position found: " << std::distance(sorted.begin(), leftPos) << std::endl;
+	std::cout << "Insert "<< newElement<<" into position " << std::distance(sorted.begin(), leftPos) << std::endl;
 	
 	// Insert the new element
 	sorted.insert(leftPos, newElement);
@@ -525,4 +554,21 @@ void PmergeMe<T,Container>::sortn(Container & sorted, Container & numbers)
     }
 }
 
+
+
+
+
+template<typename T, typename Container>
+void  PmergeMe<T,Container>::jacobsthal(size_t elements_to_insert)
+{
+    if (this->J.size() > 0) { this->J.clear();}
+    if (elements_to_insert > 0) {this->J.push_back(0);}
+    if (elements_to_insert > 1) {this->J.push_back(1);}
+    for (size_t i = 2; i < elements_to_insert; ++i)
+    {
+        this->J.push_back(this->J[ i - 1] + 2LL * this->J[ i - 2]);
+        if ( elements_to_insert <= this->J.back() )
+            break;
+    }
+}   
 #endif
