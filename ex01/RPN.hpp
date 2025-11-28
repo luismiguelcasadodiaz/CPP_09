@@ -1,20 +1,24 @@
 #ifndef RPN_HH
 #define RPN_HH
+#include <stack>
 
-class Rpn
+class RPN
 {
     private:
         std::stack<int> s;
     public:
-        Rpn( void );
-        Rpn( void );
-        Rpn( Rpn const ^ other );
-        Rpn( void );        
+        RPN( void );
+        ~RPN( void );
+        RPN( RPN const & other );
+        RPN & operator=( RPN const & other );        
 
         void sum (void);
         void dif (void);
         void mul (void);
         void div (void);
+        int &  top (void);
+        void pus (int const & num);
+        void pop (void);
 };
 
-#end_if
+#endif
