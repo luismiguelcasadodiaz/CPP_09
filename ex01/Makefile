@@ -6,7 +6,7 @@
 #    By: luicasad <luicasad@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 13:07:33 by luicasad          #+#    #+#              #
-#    Updated: 2025/11/10 18:14:06 by luicasad         ###   ########.fr        #
+#    Updated: 2025/11/28 22:46:47 by luicasad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ DARK_YELLOW		=	\033[38;5;143m
 #                                 TARGETS                                      #
 # ============================================================================ #
 
-TARGET			= main
+TARGET			= RPN
 SRCDIR			= ./
 OBJDIR 			= ./obj/
 
@@ -49,10 +49,10 @@ CFLGS			= $(DBGFL) $(WRNFL) -c
 #HEADS			= -I$(INCDIR)
 LFLGS 			= #-fsanitize=address
 
-HEADERS		=	MutantStack.hpp \
+HEADERS		=	RPN.hpp \
 
 
-SRCS_TARGET	= 	MutantStack.cpp \
+SRCS_TARGET	= 	RPN.cpp \
 				main.cpp
 
 
