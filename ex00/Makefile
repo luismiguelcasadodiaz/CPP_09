@@ -44,15 +44,17 @@ REQUIRED_DIRS	= $(OBJDIR)
 CC 				= c++ -std=c++98 
 CC 				= clang++ -std=c++98
 WRNFL			= -Wall -Wextra -Werror -MMD -MP #-Wshadow #-fsanitize=address
-#DBGFL			= -g3  -pg
+DBGFL			= -g3  -pg
 CFLGS			= $(DBGFL) $(WRNFL) -c 
 #HEADS			= -I$(INCDIR)
 LFLGS 			= #-fsanitize=address
 
-HEADERS		=	MutantStack.hpp \
+HEADERS		=	Date.hpp \
+				BitcoinExchange.hpp \
 
 
-SRCS_TARGET	= 	MutantStack.cpp \
+SRCS_TARGET	= 	Date.cpp \
+				BitcoinExchange.cpp \
 				main.cpp
 
 

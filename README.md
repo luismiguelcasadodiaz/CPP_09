@@ -1,6 +1,21 @@
 # CPP_09
 STL
 
+# Bitcoin Exchange
+
+
+Two files to process:
+Input file: "date | value" ==>2011-01-03 | 2
+Data  file: "data,value"   ==>2022-02-05,41435.43
+
+Two Slits to do.
+
+One date to check
+One value to check (positive integer or float)
+
+
+
+
 
 
 # PmergeMe

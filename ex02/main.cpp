@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 	//v.insert(v.begin(), vec.begin(), vec.end());
 	clock_t end_insert_v = clock();
 	std::cout << "Vector content Before:  " ;
-	std::for_each(v.begin(), v.end(), ImprimirElemento);
+	std::for_each(v.before_begin(), v.before_end(), ImprimirElemento);
 	std::cout << std::endl;
 
 
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 	clock_t end_insert_d = clock();
 
 	std::cout << "Deque content Before:   " ;
-	std::for_each(d.begin(), d.end(), ImprimirElemento);
+	std::for_each(d.before_begin(), d.before_end(), ImprimirElemento);
 	std::cout << std::endl;
 
 	std::cout << "------------------ INSERT TIMES ---------------------: " << std::endl ;
@@ -90,13 +90,15 @@ int main(int argc, char** argv)
 	std::cout << "Deque insert Time : " ;
     std::cout << (double) 1000000.0 *  (end_insert_d - start_insert_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
 
-/*
+
 	std::cout << "------------------ SORT STL TIMES ---------------------: " << std::endl ;
+	PmergeMe<unsigned int, std::vector<unsigned int> > vSTL(vec);
+	PmergeMe<unsigned int> dSTL(vec);
 	clock_t start_sortSTL_v = clock();
-	v.sortSTL();
+	vSTL.sortSTL();
 	clock_t end_sortSTL_v = clock();
 	clock_t start_sortSTL_d = clock();
-	d.sortSTL();
+	dSTL.sortSTL();
 	clock_t end_sortSTL_d = clock();
 
 	std::cout << "Vector sort Time : " ;
@@ -104,7 +106,7 @@ int main(int argc, char** argv)
 	std::cout << "Deque sort Time : " ;
     std::cout << (double) 1000000.0 *  (end_sortSTL_d - start_sortSTL_d) / CLOCKS_PER_SEC  << "µs" << std::endl;
 
-*/
+
 	std::cout << "------------------ SORT TIMES ---------------------: " << std::endl ;
 	clock_t start_sort_v = clock();
 	v.sort();
@@ -114,11 +116,11 @@ int main(int argc, char** argv)
 	clock_t end_sort_d = clock();
 
 	std::cout << "Vector content After:\t" ;
-	std::for_each(v.begin(), v.end(), ImprimirElemento);
+	std::for_each(v.after_begin(), v.after_end(), ImprimirElemento);
 	std::cout << std::endl;
-	//std::cout << "Deque content After:  " ;
-	//std::for_each(d.begin(), d.end(), ImprimirElemento);
-	//std::cout << std::endl;
+	std::cout << "Deque content After:\t" ;
+	std::for_each(d.after_begin(), d.after_end(), ImprimirElemento);
+	std::cout << std::endl;
 
 
 	std::cout << "Vector sort Time : " ;
