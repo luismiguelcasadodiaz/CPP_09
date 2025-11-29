@@ -108,7 +108,7 @@ graph LR
 ```
 ```mermaid
 graph TD
-    subgraph Secuencia_Main
+    subgraph Main_level_1
         M1[11] --> M2(17)
         M2 --> M3(16)
         M3 --> M4(15)
@@ -121,7 +121,7 @@ graph TD
         M10 --> M11(13)
     end
     
-    subgraph Secuencia_Pend
+    subgraph Pend_level_1
         P1[2] --> P2(0)
         P2 --> P3(8)
         P3 --> P4(6)
@@ -147,7 +147,7 @@ graph TD
 
 ```mermaid
 graph LR
-    subgraph Parejas_Main
+    subgraph Pairs_Main_level_1
         PMA1(11 17)
         PMA2(16 15)
         PMA3(10 21)
@@ -159,6 +159,21 @@ graph LR
     classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
     class PMA1,PMA2,PMA3,PMA4,PMA5,PMA6 mainStyle
 ```
+```Mermaid
+graph LR
+    subgraph Main_Mayores
+        MM1[17] --> MM2(16)
+        MM2 --> MM3(21)
+        MM3 --> MM4(19)
+        MM4 --> MM5(20)
+        MM5 --> MM6(13)
+    end
+    
+    classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
+    class MM1,MM2,MM3,MM4,MM5,MM6 mainStyle
+``
+
+
 
 
 
