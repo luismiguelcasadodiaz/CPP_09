@@ -159,7 +159,7 @@ graph LR
     classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
     class PMA1,PMA2,PMA3,PMA4,PMA5,PMA6 mainStyle
 ```
-```Mermaid
+```mermaid
 graph LR
     subgraph Main_Mayores
         MM1[17] --> MM2(16)
