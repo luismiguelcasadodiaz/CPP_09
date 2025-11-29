@@ -1,3 +1,5 @@
+### Original sequence of numbers.
+
 ```mermaid
 graph LR
     A[11] --> B(2)
@@ -21,4 +23,59 @@ graph LR
     S --> T(20)
     T --> U(13)
     U --> V(7)
+```
+
+### Pairs agrupation
+```mermaid
+graph LR
+    subgraph Parejas
+        P1(11 & 2)
+        P2(17 & 0)
+        P3(16 & 8)
+        P4(6 & 15)
+        P5(10 & 3)
+        P6(21 & 1)
+        P7(18 & 9)
+        P8(14 & 19)
+        P9(12 & 5)
+        P10(4 & 20)
+        P11(13 & 7)
+    end
+```
+### Pairs sort
+```mermaid
+graph TD
+    subgraph Pareja_1
+        A1[11] --> B1(2)
+    end
+    subgraph Pareja_2
+        A2[17] --> B2(0)
+    end
+    subgraph Pareja_3
+        A3[16] --> B3(8)
+    end
+    subgraph Pareja_4
+        A4[15] --> B4(6)
+    end
+    subgraph Pareja_5
+        A5[10] --> B5(3)
+    end
+    subgraph Pareja_6
+        A6[21] --> B6(1)
+    end
+    subgraph Pareja_7
+        A7[18] --> B7(9)
+    end
+    subgraph Pareja_8
+        A8[19] --> B8(14)
+    end
+    subgraph Pareja_9
+        A9[12] --> B9(5)
+    end
+    subgraph Pareja_10
+        A10[20] --> B10(4)
+    end
+    subgraph Pareja_11
+        A11[13] --> B11(7)
+    end
 ```
