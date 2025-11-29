@@ -10,27 +10,40 @@
 # ~/.config/gdb/gdbinit
 # a line starting with add-auto-load-safe-path <absolute path to this file>
 # add-auto-load-safe-path /home/......../circle4/namada_minshell/.gdbinit
-
+# to enable history of gdb cli
+set history save on
+# to remove duplicates form history
+set history remove-duplicates 1
 # to enable Debuginfo
-# set debuginfod enabled on
+set debuginfod enabled on
 # To print structs in a more readable form
 set print pretty on
 # Follow child at fork()
 set follow-fork-mode child
 # To keep father & child under control with "inferior" command
 set detach-on-fork off
-#set scheduler-locking on
+
 # Set Breakpoint at main function
-break main
-# Set Conditional breakpoint
-break arg_pars.c:54 if i == 5
+#break main:
+
+#break a la entrade de una función
+#break eleme_hittables_sph.c:hit_sphere 
+
 # Set other breakpoint
+#break init.c:108
+#break init.c:117
+#break win_init.c:75
+
+#Break condicional
+#break is_scene4.c:73  if ((wy0 == 140) && (wx0 ==250))
+
+######################  Breaks FT_IRC  ######################################
+
+
+break PmergeMe.hpp:228
 break main
-break PmergeMe.hpp:164
-display this->sorted
-display *rightPos
-display *midpos
-display *leftPos
-display newElement
-# set alias
-run 77 55 33 66 11 44 22 
+display this->_numbers
+display this->_sorted
+display m
+display p
+run 45 39 88 89 1 53 35 30 72 10 45 39 88 89 1 53 35 30 72 100 
