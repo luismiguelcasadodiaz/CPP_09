@@ -107,7 +107,7 @@ graph LR
     J --> K(7)
 ```
 ```mermaid
-graph LR
+graph TD
     subgraph Secuencia_Main
         M1[11] --> M2(17)
         M2 --> M3(16)
