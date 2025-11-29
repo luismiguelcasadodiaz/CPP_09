@@ -160,7 +160,7 @@ graph LR
     class PMA1,PMA2,PMA3,PMA4,PMA5,PMA6 mainStyle
 ```
 ```mermaid
-graph LR
+graph TD
     subgraph Main_Mayores
         MM1[17] --> MM2(16)
         MM2 --> MM3(21)
@@ -171,6 +171,16 @@ graph LR
     
     classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
     class MM1,MM2,MM3,MM4,MM5,MM6 mainStyle
+
+    subgraph Main_Menores
+        MN1[11] --> MN2(15)
+        MN2 --> MN3(10)
+        MN3 --> MN4(18)
+        MN4 --> MN5(12)
+    end
+    
+    classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
+    class MN1,MN2,MN3,MN4,MN5 mainStyle
 ```
 
 
