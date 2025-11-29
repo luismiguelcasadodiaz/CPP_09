@@ -144,3 +144,24 @@ graph TD
     %% Aplicación de Estilos a los Nodos de Pend
     class P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11 pendStyle
 ```
+
+```mermaid
+graph LR
+    subgraph Parejas_Main
+        PMA1(11 17)
+        PMA2(16 15)
+        PMA3(10 21)
+        PMA4(18 19)
+        PMA5(12 20)
+        PMA6(13)
+    end
+    
+    classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
+    class PMA1,PMA2,PMA3,PMA4,PMA5,PMA6 mainStyle
+```
+
+
+
+
+
+
