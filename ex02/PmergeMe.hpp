@@ -120,69 +120,140 @@ void PmergeMe<T,Container>::sortSTL(void)
 }
 
 template<typename T, typename Container>
+void PmergeMe<T,Container>::sort(void)
+{
+    this->sortn(this->_sorted, this->_numbers);
+}
+
+template<typename T, typename Container>
+void PmergeMe<T,Container>::sortn(Container & sorted, Container & numbers)
+{
+    Container m ; // largest numbers
+    Container p ; // Smallest numbers
+    size_t n = numbers.size();
+    for (size_t i = 0; i < n - 1 ; i += 2) // (0 vs 1) (2 vs 3) ....( n)
+    {
+        if ( numbers[ i ] < numbers[ i + 1 ])
+        { 
+            m.push_back( numbers[ i + 1 ] ) ;
+            p.push_back( numbers[ i     ] ) ;           
+        }
+        else
+        {
+            m.push_back( numbers[ i     ] ) ;
+            p.push_back( numbers[ i + 1 ] ) ;              
+        }
+    }
+	if ( ( n % 2) == 1) // n was odd
+    { 
+        m.push_back( numbers[ n - 1 ] ) ;
+    }
+	if (n > 2)
+    {
+        this->sortn(sorted, m);
+		//if ( ( n % 2) == 1) // n was odd
+		//{ 
+		//	this->insert_element(sorted, sorted.end(),  numbers[ n - 1 ] ) ;
+		//}
+        this->binary_insertion(sorted, m, p);
+        //numbers.clear();
+        //numbers.insert(numbers.begin(), m.begin(), m.end());
+    }
+    else if ( n == 2)
+    { 
+        sorted.push_back(p.back());
+        sorted.push_back(m.back());
+    } else {
+        sorted.push_back(numbers.back());
+    }
+}
+
+
+
+
+
+template<typename T, typename Container>
+void  PmergeMe<T,Container>::jacobsthal(size_t elements_to_insert)
+{
+    if (this->J.size() > 0) { this->J.clear();}
+    if (elements_to_insert > 0) {this->J.push_back(0);}
+    if (elements_to_insert > 1) {this->J.push_back(1);}
+    for (size_t i = 2; i < elements_to_insert; ++i)
+    {
+        this->J.push_back(this->J[ i - 1] + 2LL * this->J[ i - 2]);
+        if ( elements_to_insert <= this->J.back() )
+            break;
+    }
+}   
+template<typename T, typename Container>
 void PmergeMe<T,Container>::binary_insertion(Container & sorted, Container & main, Container & pend)
 {
     
-    (void)main;
     size_t idx = 0;
-    
-    std::cout << "Into (0, " << sorted.size() - 1 << ")==> ";
+	size_t p_size = pend.size();
+/*	size_t m_size = main.size();
+	size_t s_size = sorted.size();
+   
+    std::cout << "Into (0, " << s_size - 1 << ")==> ";
 
-    while (idx < sorted.size() ) 
+    while (idx < s_size ) 
     {
         std::cout << sorted[idx++] << " ";
     }
-    std::cout << " Inserting (" << main.size() << "," << main.size() + pend.size() - 1 <<") ==>";
+   std::cout << " Inserting (" << m_size << "," << m_size + p_size - 1 <<") ==>";
     
     idx = 0;
-    while (idx < pend.size() ) 
+    while (idx < p_size ) 
     {
         std::cout << pend[idx++] << " ";
     }
-    std::cout << std::endl;
-
     idx = 0;
-    
-    /*
-    while (idx < pend.size())
+    std::cout << " before big partners  ==>";
+    while (idx < m_size ) 
     {
-        //std::cout << "inserting " << pend[idx] << std::endl;
-        // Where is located the already ordered pair of the pending one to insert
-        if (idx < main.size() )
-        { 
-            typename Container::iterator it = find (sorted.begin(), sorted.end(), main[idx]);
-            this->insert_element(sorted, it, pend[idx++]);
-        }
-        else
-        {
-            this->insert_element(sorted, sorted.end(), pend[idx++]);
-        }
+        std::cout << main[idx++] << " ";
     }
-    */
-    this->insert_element(sorted, sorted.end() , pend[1]);
-    this->insert_element(sorted, sorted.end() , pend[0]);
-    idx = 2;
-    //while ( ( idx < ( this->J.size() - 1) ) && ( this->J[idx + 1] <= pend.size() ) )
-    while ( ( idx < ( this->J.size() - 1) ) )
-    {
-        size_t lastone;
-        if ( ( pend.size() - 1 ) <= this->J[ idx + 1 ] )
-        {
-            lastone = pend.size() - 1 ;
-        }
-        else
-        {
-            lastone = this->J[ idx + 1 ];
-        }
-        
-        for (size_t i = lastone ; this->J[ idx ] < i; i--)
-        {
-            typename Container::iterator it = find (sorted.begin(), sorted.end(), main[idx]);
-            this->insert_element(sorted, it , pend[i]);            
-            //this->insert_element(sorted, sorted.end() , pend[i]);
-        }
-        idx++;
-    }
+    std::cout << std::endl;
+*/
+    idx = 0;
+
+	if ( p_size == 1 )
+	{
+    	this->insert_element(sorted, sorted.end() , pend[0]);
+	} else {
+    	this->insert_element(sorted, sorted.end() , pend[1]);
+    	this->insert_element(sorted, sorted.end() , pend[0]);
+		idx = 2;
+		//while ( ( idx < ( this->J.size() - 1) ) && ( this->J[idx + 1] <= pend.size() ) )
+		while ( ( idx < ( this->J.size() - 1) ) )
+		{
+			size_t lastone;
+			if ( ( p_size - 1 ) <= this->J[ idx + 1 ] )
+			{
+				lastone = p_size - 1 ;
+			}
+			else
+			{
+				lastone = this->J[ idx + 1 ];
+			}
+			
+			for (size_t i = lastone ; this->J[ idx ] < i; i--)
+			{
+			   // if (main[i] == *sorted.begin())
+				//{
+			//		//sorted.push_front(pend[i]) ;
+			//		sorted.insert(sorted.begin(), pend[i]);
+			//	} else {
+					//typename Container::iterator it = upper_bound (sorted.begin(), sorted.end(), main[idx + 1]);
+					typename Container::iterator it = upper_bound (sorted.begin(), sorted.end(), main[i]);
+					//std::cout << "The big pair of "<<  pend[i] << " is i " << main[i] << std::endl;
+					this->insert_element(sorted, it , pend[i]);            
+			//	}
+				//this->insert_element(sorted, sorted.end() , pend[i]);
+			}
+			idx++;
+		}
+	}
 }
 
 template<typename T, typename Container>
@@ -212,7 +283,7 @@ Container::iterator rightPos, T newElement)
 		}
 	}
 	
-	std::cout << "Insert "<< newElement<<" into position " << std::distance(sorted.begin(), leftPos) << std::endl;
+	//std::cout << "Insert "<< newElement<<" into position " << std::distance(sorted.begin(), leftPos) << std::endl;
 	
 	// Insert the new element
 	sorted.insert(leftPos, newElement);
@@ -509,66 +580,4 @@ void PmergeMe<T,Container>::sort5(void)
     }
 }
 */
-template<typename T, typename Container>
-void PmergeMe<T,Container>::sort(void)
-{
-    this->sortn(this->_sorted, this->_numbers);
-}
-
-template<typename T, typename Container>
-void PmergeMe<T,Container>::sortn(Container & sorted, Container & numbers)
-{
-    Container m ;
-    Container p ;
-    size_t n = numbers.size();
-    for (size_t i = 0; i < n - 1 ; i += 2) // (0 vs 1) (2 vs 3) ....( n)
-    {
-        if ( numbers[ i ] < numbers[ i + 1 ])
-        { 
-            m.push_back( numbers[ i + 1 ] ) ;
-            p.push_back( numbers[ i     ] ) ;           
-        }
-        else
-        {
-            m.push_back( numbers[ i     ] ) ;
-            p.push_back( numbers[ i + 1 ] ) ;              
-        }
-    }
-    if ( ( n % 2) == 1) // n was odd
-    { 
-        p.push_back( numbers[ n - 1 ] ) ;
-    }
-    if (n > 2)
-    {
-        this->sortn(sorted, m);
-        this->binary_insertion(sorted, m, p);
-        //numbers.clear();
-        //numbers.insert(numbers.begin(), m.begin(), m.end());
-    }
-    else if ( n == 2)
-    { 
-        sorted.push_back(p.back());
-        sorted.push_back(m.back());
-    } else {
-        sorted.push_back(numbers.back());
-    }
-}
-
-
-
-
-
-template<typename T, typename Container>
-void  PmergeMe<T,Container>::jacobsthal(size_t elements_to_insert)
-{
-    if (this->J.size() > 0) { this->J.clear();}
-    if (elements_to_insert > 0) {this->J.push_back(0);}
-    if (elements_to_insert > 1) {this->J.push_back(1);}
-    for (size_t i = 2; i < elements_to_insert; ++i)
-    {
-        this->J.push_back(this->J[ i - 1] + 2LL * this->J[ i - 2]);
-        if ( elements_to_insert <= this->J.back() )
-            break;
-    }
-}   
 #endif

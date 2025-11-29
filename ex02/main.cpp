@@ -58,24 +58,23 @@ int main(int argc, char** argv)
 	// Copy to vector
 	std::vector<unsigned int> vec(mySet.begin(), mySet.end());
 
-	// Shuffle the vector
+	// Shuffle the vector. THen set sorted all.
 	std::random_shuffle(vec.begin(), vec.end());
+    
 
-
-
-	clock_t start_insert_v = clock();
+//	clock_t start_insert_v = clock();
 	PmergeMe<unsigned int, std::vector<unsigned int> > v(vec);
 	//v.insert(v.begin(), vec.begin(), vec.end());
-	clock_t end_insert_v = clock();
-	std::cout << "Vector content Before:  " ;
-	std::for_each(v.before_begin(), v.before_end(), ImprimirElemento);
-	std::cout << std::endl;
+//	clock_t end_insert_v = clock();
 
-
+//	std::cout << "Vector content Before:  " ;
+//	std::for_each(v.before_begin(), v.before_end(), ImprimirElemento);
+//	std::cout << std::endl;
+/*
 	clock_t start_insert_d = clock();
 	//d.insert(d.begin(),vec.begin(), vec.end());
-	PmergeMe<unsigned int> d(vec);
-	clock_t end_insert_d = clock();
+*/	PmergeMe<unsigned int> d(vec);
+/*	clock_t end_insert_d = clock();
 
 	std::cout << "Deque content Before:   " ;
 	std::for_each(d.before_begin(), d.before_end(), ImprimirElemento);
@@ -109,19 +108,19 @@ int main(int argc, char** argv)
 
 	std::cout << "------------------ SORT TIMES ---------------------: " << std::endl ;
 	clock_t start_sort_v = clock();
-	v.sort();
-	clock_t end_sort_v = clock();
+*///	v.sort();
+/*	clock_t end_sort_v = clock();
 	clock_t start_sort_d = clock();
-	d.sort();
-	clock_t end_sort_d = clock();
-
-	std::cout << "Vector content After:\t" ;
-	std::for_each(v.after_begin(), v.after_end(), ImprimirElemento);
-	std::cout << std::endl;
+*/	d.sort();
+/*	clock_t end_sort_d = clock();
+*/
+//	std::cout << "Vector content After:\t" ;
+//	std::for_each(v.after_begin(), v.after_end(), ImprimirElemento);
+//	std::cout << std::endl;
 	std::cout << "Deque content After:\t" ;
 	std::for_each(d.after_begin(), d.after_end(), ImprimirElemento);
 	std::cout << std::endl;
-
+/*
 
 	std::cout << "Vector sort Time : " ;
     std::cout << (double) 1000000.0 *  (end_sort_v - start_sort_v) / CLOCKS_PER_SEC  << "µs" << std::endl;
@@ -135,4 +134,5 @@ int main(int argc, char** argv)
 	std::cout << " elements with std::vector<unsigned int> : " << std::endl;
 	std::cout << "Time to process a range of " << v.size() ;
 	std::cout << " elements with std::deque<unsigned int> : " << std::endl;
+	*/
 }
