@@ -106,3 +106,41 @@ graph LR
     I --> J(4)
     J --> K(7)
 ```
+```mermaid
+graph LR
+    subgraph Secuencia_Main
+        M1[11] --> M2(17)
+        M2 --> M3(16)
+        M3 --> M4(15)
+        M4 --> M5(10)
+        M5 --> M6(21)
+        M6 --> M7(18)
+        M7 --> M8(19)
+        M8 --> M9(12)
+        M9 --> M10(20)
+        M10 --> M11(13)
+    end
+    
+    subgraph Secuencia_Pend
+        P1[2] --> P2(0)
+        P2 --> P3(8)
+        P3 --> P4(6)
+        P4 --> P5(3)
+        P5 --> P6(1)
+        P6 --> P7(9)
+        P7 --> P8(14)
+        P8 --> P9(5)
+        P9 --> P10(4)
+        P10 --> P11(7)
+    end
+
+    %% Definición de Estilos (Clases)
+    classDef mainStyle fill:#0077b6,stroke:#0077b6,stroke-width:2px,color:white
+    classDef pendStyle fill:#e63946,stroke:#e63946,stroke-width:2px,color:white
+
+    %% Aplicación de Estilos a los Nodos de Main
+    class M1,M2,M3,M4,M5,M6,M7,M8,M9,M10,M11 mainStyle
+
+    %% Aplicación de Estilos a los Nodos de Pend
+    class P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11 pendStyle
+```
