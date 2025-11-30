@@ -8,11 +8,43 @@ Two files to process:
 Input file: "date | value" ==>2011-01-03 | 2
 Data  file: "data,value"   ==>2022-02-05,41435.43
 
-Two Slits to do.
+Two Splits to do.
 
 One date to check
 One value to check (positive integer or float)
 
+I use a map to keep tuples (date, value).
+
+I created a Date Class. The date is the key of my map.
+
+The Date class checks for valid dates.
+The Date class overloads operator `<` required by map upper_bound lookup method.
+
+As `upper_bound` returns an iterator pointing to the first element that is **greater** than key.
+
+
+2022-03-25,44334.33
+2022-03-29,47115.93
+
+Looking for `2022-03-25` upper_bound return `2022-03-29`
+Looking for `2022-03-28` upper_bound return `2022-03-29`
+
+this is the reason why pre-decrement the returned iterator.
+
+
+```c++
+float BitcoinExchange::getChange( Date const & day) const
+{
+    // Search the first element bigger than the one searched
+    std::map<Date, float>::const_iterator it = this->data.upper_bound(day);
+
+    if ( it != this->data.begin() ) // it is not the first one
+    {
+        --it;   // this point to the lower or equal to the one searched
+    }
+    return it->second;
+}
+```
 
 
 
