@@ -103,7 +103,6 @@ int main(int argc , char **argv)
     try
     {
         BitcoinExchange bex("data.csv");
-        std::cout << bex.getChange(Date("2012-04-23")) << std::endl;
         if ( argc != 2)
         {
             std::cout << "Error: could not open file." << std::endl;
