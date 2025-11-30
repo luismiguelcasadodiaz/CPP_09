@@ -35,7 +35,12 @@ int main (int argc, char **argv)
 				std::cout << "Error" << std::endl;
 			}
 		}
-		std::cout << c.top() << std::endl;
+		if ( c.size() > 0 )
+		{
+			std::cout << c.top() << std::endl;
+		} else {
+			std::cout << "Pila Vacia" << std::endl;
+		}
 	} catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl ;

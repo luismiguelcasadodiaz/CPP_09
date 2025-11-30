@@ -104,3 +104,8 @@ void RPN::pop (void)
 	this->s.pop();
 }
 
+
+int RPN::size (void) const
+{
+	return this->s.size();
+}

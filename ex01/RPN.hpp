@@ -19,6 +19,7 @@ class RPN
         int &  top (void);
         void pus (int const & num);
         void pop (void);
+		int size (void) const ;
 };
 
 #endif
